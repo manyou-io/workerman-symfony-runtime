@@ -1,0 +1,44 @@
+{
+    "name": "manyou/workerman-symfony-runtime",
+    "type": "library",
+    "description": "Run Symfony applications with Workerman",
+    "keywords": ["workerman", "symfony", "runtime", "php-runtime"],
+    "homepage": "https://github.com/manyou-io/workerman-symfony-runtime",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bohan Yang",
+            "email": "youthdna@live.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.0.2",
+        "chubbyphp/chubbyphp-workerman-request-handler": "^1.2",
+        "nyholm/psr7": "^1.5",
+        "symfony/psr-http-message-bridge": "^2.1",
+        "symfony/runtime": "^5.4 || ^6.0",
+        "workerman/workerman": "^4.0",
+        "symfony/http-kernel": "^5.4 || ^6.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "symfony/runtime": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "require-dev": {
+        "doctrine/coding-standard": "9.0.x-dev",
+        "slevomat/coding-standard": "^8.1",
+        "squizlabs/php_codesniffer": "^3.7",
+        "webimpress/coding-standard": "^1.2",
+        "blackfire/php-sdk": "^1.31",
+        "monolog/monolog": "^3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Manyou\\WorkermanSymfonyRuntime\\": "src/"
+        }
+    }
+}
