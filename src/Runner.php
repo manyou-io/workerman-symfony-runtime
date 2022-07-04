@@ -42,6 +42,8 @@ class Runner implements RunnerInterface
         private Closure $appFactory,
         private string $socket,
         private int $workers,
+        private string $pidFile,
+        private string $logFile,
     ) {
         $this->psr17Factory             = new Psr17Factory();
         $this->httpFoundationFactory    = new HttpFoundationFactory();
@@ -52,8 +54,10 @@ class Runner implements RunnerInterface
 
     public function run(): int
     {
-        $worker        = new Worker($this->socket);
-        $worker->count = $this->workers;
+        $worker           = new Worker($this->socket);
+        $worker->count    = $this->workers;
+        $worker::$pidFile = $this->pidFile;
+        $worker::$logFile = $this->logFile;
 
         $worker->onWorkerStart = function (Worker $worker): void {
             // Instantiate HttpKernel
