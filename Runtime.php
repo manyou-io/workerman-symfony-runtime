@@ -20,8 +20,8 @@ class Runtime extends SymfonyRuntime
 
     public function __construct(array $options = [])
     {
-        $this->socket  = $options['socket'] ?? 'http://0.0.0.0:' . ($_SERVER['PORT'] ?? $_ENV['PORT'] ?? 8080);
-        $this->workers = isset($options['workers']) ? (int) $options['workers'] : 2;
+        $this->socket  = $options['socket'] ?? 'http://0.0.0.0:' . ($_SERVER['PORT'] ?? $_ENV['PORT'] ?? 8283);
+        $this->workers = isset($options['workers']) ? (int) $options['workers'] : 1;
 
         $hash          = md5(__FILE__);
         $this->pidFile = $options['pid_file'] ?? "/tmp/workerman-$hash.pid";
