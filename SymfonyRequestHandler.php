@@ -11,6 +11,7 @@ use Symfony\Bridge\PsrHttpMessage\HttpFoundationFactoryInterface;
 use Symfony\Bridge\PsrHttpMessage\HttpMessageFactoryInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\TerminableInterface;
+use Workerman\Timer;
 
 class SymfonyRequestHandler implements RequestHandlerInterface
 {
@@ -28,7 +29,10 @@ class SymfonyRequestHandler implements RequestHandlerInterface
         $response   = $this->httpMessageFactory->createResponse($sfResponse);
 
         if ($this->kernel instanceof TerminableInterface) {
-            $this->kernel->terminate($sfRequest, $sfResponse);
+            $kernel = $this->kernel;
+            Timer::add(1, static function () use ($kernel, $sfRequest, $sfResponse) {
+                $kernel->terminate($sfRequest, $sfResponse);
+            }, persistent: false);
         }
 
         return $response;
