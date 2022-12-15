@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Manyou\WorkermanSymfonyRuntime\Bundle;
+namespace Manyou\WorkermanSymfonyRuntime;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
