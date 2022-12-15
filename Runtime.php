@@ -24,9 +24,9 @@ class Runtime extends SymfonyRuntime
             ?? $_SERVER['APP_RUNTIME_SOCKET'] ?? $_ENV['APP_RUNTIME_SOCKET']
             ?? 'http://0.0.0.0:' . ($_SERVER['PORT'] ?? $_ENV['PORT'] ?? 8283);
 
-        $this->workers = isset($options['workers'])
-            ? (int) $options['workers']
-            : ($_SERVER['APP_RUNTIME_WORKERS'] ?? $_ENV['APP_RUNTIME_WORKERS'] ?? 1);
+        $this->workers = (int) (isset($options['workers'])
+            ? $options['workers']
+            : ($_SERVER['APP_RUNTIME_WORKERS'] ?? $_ENV['APP_RUNTIME_WORKERS'] ?? 1));
 
         $hash = md5(__FILE__);
 
