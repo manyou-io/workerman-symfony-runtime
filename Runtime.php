@@ -20,12 +20,25 @@ class Runtime extends SymfonyRuntime
 
     public function __construct(array $options = [])
     {
-        $this->socket  = $options['socket'] ?? 'http://0.0.0.0:' . ($_SERVER['PORT'] ?? $_ENV['PORT'] ?? 8283);
-        $this->workers = isset($options['workers']) ? (int) $options['workers'] : 1;
+        $this->socket = $options['socket']
+            ?? $_SERVER['APP_RUNTIME_SOCKET'] ?? $_ENV['APP_RUNTIME_SOCKET']
+            ?? 'http://0.0.0.0:' . ($_SERVER['PORT'] ?? $_ENV['PORT'] ?? 8283);
 
-        $hash          = md5(__FILE__);
-        $this->pidFile = $options['pid_file'] ?? "/tmp/workerman-$hash.pid";
-        $this->logFile = $options['log_file'] ?? "/tmp/workerman-$hash.log";
+        $this->workers = isset($options['workers'])
+            ? (int) $options['workers']
+            : ($_SERVER['APP_RUNTIME_WORKERS'] ?? $_ENV['APP_RUNTIME_WORKERS'] ?? 1);
+
+        $hash = md5(__FILE__);
+
+        $this->pidFile = $options['pid_file']
+            ?? $_SERVER['APP_RUNTIME_PID_FILE']
+            ?? $_ENV['APP_RUNTIME_PID_FILE']
+            ?? "/tmp/workerman-$hash.pid";
+
+        $this->logFile = $options['log_file']
+            ?? $_SERVER['APP_RUNTIME_LOG_FILE']
+            ?? $_ENV['APP_RUNTIME_LOG_FILE']
+            ?? "/tmp/workerman-$hash.log";
 
         parent::__construct($options);
     }
