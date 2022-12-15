@@ -22,9 +22,7 @@
         "symfony/http-foundation": "^6.1",
         "symfony/dependency-injection": "^6.1",
         "psr/http-factory": "^1.0",
-        "psr/http-server-handler": "^1.0"
-    },
-    "require-dev": {
+        "psr/http-server-handler": "^1.0",
         "nyholm/psr7": "^1.5"
     },
     "minimum-stability": "dev",
