@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use Chubbyphp\WorkermanRequestHandler\OnMessage;
 use Chubbyphp\WorkermanRequestHandler\OnMessageInterface;
 use Chubbyphp\WorkermanRequestHandler\PsrRequestFactory;
 use Chubbyphp\WorkermanRequestHandler\PsrRequestFactoryInterface;
-use Chubbyphp\WorkermanRequestHandler\WorkermanResponseEmitter;
-use Chubbyphp\WorkermanRequestHandler\WorkermanResponseEmitterInterface;
 use Manyou\WorkermanSymfonyRuntime\HeaderNameMapper;
+use Manyou\WorkermanSymfonyRuntime\OnMessage;
 use Manyou\WorkermanSymfonyRuntime\SymfonyRequestHandler;
 use Psr\Http\Server\RequestHandlerInterface;
 use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
@@ -49,8 +47,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     // Workerman Request to PSR Request
     $services->set(PsrRequestFactoryInterface::class, PsrRequestFactory::class);
-
-    $services->set(WorkermanResponseEmitterInterface::class, WorkermanResponseEmitter::class);
 
     $services->set(SymfonyRequestHandler::class)
         ->arg(HttpKernelInterface::class, service('kernel'));
